@@ -17,12 +17,11 @@ const MAINNET_FORK = process.env.MAINNET_RPC_URL
 module.exports = {
   solidity: {
     compilers: [
-      {version: "0.5.5"},
-      {version: "0.6.6"},
       {version: "0.8.8"},
       {version: "0.8.16"},
-      {version: "0.6.0"},
-      {version: "0.8.0"}
+      {version: "0.8.0"},
+      {version: "0.8.10"},
+      {version: "0.8.4"},
     ],
   },
  
