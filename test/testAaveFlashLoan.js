@@ -26,10 +26,12 @@ describe("Deploy a FlashLoan", function () {
         // off the loan with premium, as we will otherwise not be able to pay the premium. In real world applications,
         // the premium would be paid off the profits made from arbitrage or attacking a smart contract.
         await dai.connect(signer).transfer(aaveFlashLoan.address, amountOfDai) // send our contract dai amount from dai whale
+        const balanceBefore = await dai.balanceOf(aaveFlashLoan.address)
         const tx = await aaveFlashLoan.testFlashLoan(DAI, 1000) // We are borrowing 1000 DAI
         await tx.wait();
         const remainingBalance = await dai.balanceOf(aaveFlashLoan.address); // Check balance of DAI in FlashLoan contract after action
-        console.log(remainingBalance.toString())
+        console.log(`DAI balance after FlashLoan: ${balanceBefore.toString()}`)
+        console.log(`DAI balance after FlashLoan: ${remainingBalance.toString()}`)
         expect(remainingBalance.lt(amountOfDai)).to.be.true; // We must have less than 2000 DAI now because premium fee was paid from contract balance
     })
 })
